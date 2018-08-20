@@ -1,5 +1,7 @@
 # Webpack 4 simple start kit
 
+Webpack4 + Pug + es2015 + less
+
 ### Installing
 
 ```
