@@ -1,0 +1,38 @@
+{
+  "name": "SoftFacade",
+  "version": "1.0.0",
+  "description": "SoftFacade markup test issue",
+  "main": "src/js/app.js",
+  "scripts": {
+    "dev": "webpack-dev-server --mode development --open",
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreyKirichenko/softfacade_demo.git"
+  },
+  "author": "Kirichenko Andrey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AndreyKirichenko/softfacade_demo/issues"
+  },
+  "homepage": "https://github.com/AndreyKirichenko/softfacade_demo#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "css-loader": "^1.0.0",
+    "html-webpack-plugin": "^4.0.0-alpha",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.4.1",
+    "path": "^0.12.7",
+    "pug": "^2.0.3",
+    "pug-loader": "^2.4.0",
+    "style-loader": "^0.22.1",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
+  }
+}
