@@ -1,6 +1,6 @@
 # Webpack 4 simple start kit
 
-Webpack4 + Pug + es2015 + less
+Webpack4 + Pug + es2015 + scss
 
 ### Installing
 
