@@ -1,7 +1,7 @@
 {
   "name": "my_webpack_starkir",
   "version": "1.0.0",
-  "description": "My webpack 4 start kir",
+  "description": "My webpack 4 start kit",
   "main": "src/js/app.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development --open",
