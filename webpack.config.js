@@ -1,6 +1,7 @@
 let path = require('path');
 let MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let CopyWebpackPlugin = require('copy-webpack-plugin');
 
 let conf = {
   entry: './src/js/app.js',
@@ -42,7 +43,11 @@ let conf = {
     new HtmlWebpackPlugin({
       template : './src/pug/index.pug',
       filename: '../index.html'
-    })
+    }),
+    new CopyWebpackPlugin([
+      { from: 'src/img/', to: 'img/', force: true },
+      { from: 'src/fonts/', to: 'fonts/', force: true }
+    ], {})
   ],
 };
 
