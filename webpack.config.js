@@ -26,11 +26,11 @@ let conf = {
         ],
       },
       {
-        test: /\.less$/,
+        test: /\.scss$/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
-          'less-loader'
+          'sass-loader'
         ],
       }
     ]
