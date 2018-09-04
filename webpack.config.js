@@ -38,11 +38,10 @@ let conf = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'app.css',
+      filename: 'app.css'
     }),
     new HtmlWebpackPlugin({
-      template : './src/pug/index.pug',
-      filename: '../index.html'
+      template : './src/pug/index.pug'
     }),
     new CopyWebpackPlugin([
       { from: 'src/img/', to: 'img/', force: true },
