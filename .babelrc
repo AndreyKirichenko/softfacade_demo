@@ -1,3 +1,6 @@
 {
-  "presets": ["env", "stage-3"]
+  "presets": [
+    "es2015-ie",
+    "stage-1"
+  ]
 }

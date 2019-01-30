@@ -7,8 +7,7 @@ let conf = {
   entry: './src/js/app.js',
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'app.js',
-    publicPath: 'dist/'
+    filename: 'app.js'
   },
   devServer: {
     overlay: true
@@ -24,30 +23,34 @@ let conf = {
 
         use: [
           'pug-loader'
-        ],
+        ]
       },
       {
-        test: /\.scss$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
+          'postcss-loader',
           'sass-loader'
-        ],
+        ]
       }
     ]
   },
+
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'app.css'
     }),
     new HtmlWebpackPlugin({
+      filename: 'index.html',
       template : './src/pug/index.pug'
     }),
+
     new CopyWebpackPlugin([
       { from: 'src/img/', to: 'img/', force: true },
       { from: 'src/fonts/', to: 'fonts/', force: true }
     ], {})
-  ],
+  ]
 };
 
 module.exports = (env, options) => {
