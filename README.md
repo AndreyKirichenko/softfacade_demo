@@ -1,4 +1,7 @@
-# Webpack 4 simple start kit
+# smishechka-admin-markup
+
+
+### Stack
 
 Webpack4 + Babel 7 + Stage-1 / Stage-2 / Stage-3 plugins + Pug + SCSS
 
