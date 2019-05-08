@@ -57,6 +57,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
-    "dom-delegate": "^2.2.1"
+    "dom-delegate": "^2.2.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }
