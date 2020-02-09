@@ -1,60 +1,75 @@
-let path = require('path');
-let MiniCssExtractPlugin = require('mini-css-extract-plugin');
-let HtmlWebpackPlugin = require('html-webpack-plugin');
-let CopyWebpackPlugin = require('copy-webpack-plugin');
+const merge = require('webpack-merge');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-let conf = {
-  entry: './src/js/app.js',
-  output: {
-    path: path.resolve(__dirname, './dist'),
-    filename: 'app.js'
-  },
-  devServer: {
-    overlay: true
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader'
-      },
-      {
-        test: /\.pug/,
+const js = require('./webpack/js');
+const css = require('./webpack/css');
+const favicon = require('./webpack/favicon');
+const webworker = require('./webpack/webworker');
+const nodeEnv = require('./webpack/node.env');
 
-        use: [
-          'pug-loader'
-        ]
-      },
-      {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader'
-        ]
-      }
-    ]
-  },
+const pug = require('./webpack/pug');
+const sourceMap = require('./webpack/sourceMap');
+const devserver = require('./webpack/devserver');
+const lintJS = require('./webpack/js.lint');
+const lintCSS = require('./webpack/sass.lint');
 
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'app.css'
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template : './src/pug/index.pug'
-    }),
-
-    new CopyWebpackPlugin([
-      { from: 'src/img/', to: 'img/', force: true },
-      { from: 'src/fonts/', to: 'fonts/', force: true }
-    ], {})
-  ]
+const PATHS = {
+  source: path.join(__dirname, 'src'),
+  build: path.join(__dirname, 'build'),
 };
 
-module.exports = (env, options) => {
-  let production = options.mode === 'production';
-  conf.devtool = production ? false : 'eval-sourcemap';
-  return conf;
+const common = merge([
+  {
+    entry: './src/index.js',
+
+    devServer: {
+      historyApiFallback: true,
+    },
+
+    output: {
+      path: PATHS.build,
+      filename: 'index.js'
+    },
+
+    plugins: [
+      new HtmlWebpackPlugin({
+        // filenamen: './src/index.html',
+        template: PATHS.source + '/pug/index.pug',
+      }),
+
+      new CopyWebpackPlugin([
+        { from: PATHS.source + '/img/', to: 'img/', force: true },
+        { from: PATHS.source + '/fonts/', to: 'fonts/', force: true },
+        { from: PATHS.source + '/robots.txt', to: '', force: true },
+      ], {}),
+    ],
+  },
+  pug(),
+  js(),
+  css(),
+  favicon(),
+  webworker(),
+]);
+
+module.exports = function(env, argv) {
+  console.log(argv.mode);
+  if (argv.mode === 'development') {
+    return merge([
+      common,
+      devserver(),
+      sourceMap(),
+      lintJS({ paths: PATHS.source }),
+      lintCSS(),
+      nodeEnv(argv.mode),
+    ]);
+  }
+
+  if (argv.mode === 'production') {
+    return merge([
+      common,
+      nodeEnv(argv.mode),
+    ]);
+  }
 };
